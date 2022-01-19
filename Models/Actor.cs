@@ -19,8 +19,6 @@ namespace WebApplicationMovies.Models
 
         public DateTime DayOfBirth { get; set; }
 
-        //Relationship
-        //Movie
         public virtual ICollection<Movie> Movies { get; set; }
     }
 }

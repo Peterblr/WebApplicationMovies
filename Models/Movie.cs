@@ -34,25 +34,16 @@ namespace WebApplicationMovies.Models
         //Genre
         public int GenreID { get; set; }
 
-        [ForeignKey("GenreID")]
-        public Genre Genre { get; set; }
-
         //Producer
         public int ProducerID { get; set; }
 
-        [ForeignKey("ProducerID")]
-        public Producer Producer { get; set; }
-
         //Comment
-        public virtual ICollection<Comment> Comments { get; set; }
+        public int CommentID { get; set; }
 
         //Score
-        public virtual ICollection<Score> Scores { get; set; }
+        public int ScoreID { get; set; }
 
         //CollectionMovie
         public int CollectionMovieID { get; set; }
-
-        [ForeignKey("CollectionMovieID")]
-        public CollectionMovie CollectionMovie { get; set; }
     }
 }

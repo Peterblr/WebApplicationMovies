@@ -31,9 +31,6 @@ namespace WebApplicationMovies.Models
         //Role
         public int RoleID { get; set; }
 
-        [ForeignKey("RoleID")]
-        public Role Role { get; set; }
-
         //Score
         public List<Score> Scores { get; set; }
 

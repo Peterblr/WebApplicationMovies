@@ -23,9 +23,6 @@ namespace WebApplicationMovies.Models
         //User
         public int UserID { get; set; }
 
-        [ForeignKey("UserID")]
-        public User User { get; set; }
-
         //Movie
         public List<Movie> Movies { get; set; }
     }
