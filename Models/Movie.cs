@@ -38,10 +38,12 @@ namespace WebApplicationMovies.Models
         public int ProducerID { get; set; }
 
         //Comment
-        public int CommentID { get; set; }
+        [ForeignKey("Comment")]
+        public virtual ICollection<Comment> Comments { get; set; }
 
         //Score
-        public int ScoreID { get; set; }
+        [ForeignKey("Score")]
+        public virtual ICollection<Score> Scores { get; set; }
 
         //CollectionMovie
         public int CollectionMovieID { get; set; }

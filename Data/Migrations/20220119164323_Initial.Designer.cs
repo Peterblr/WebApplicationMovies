@@ -10,7 +10,7 @@ using WebApplicationMovies.Data;
 namespace WebApplicationMovies.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220119154523_Initial")]
+    [Migration("20220119164323_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -299,6 +299,9 @@ namespace WebApplicationMovies.Data.Migrations
                     b.Property<string>("Author")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("Comment")
+                        .HasColumnType("int");
+
                     b.Property<string>("CommentItem")
                         .HasColumnType("nvarchar(max)");
 
@@ -312,6 +315,8 @@ namespace WebApplicationMovies.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("CommentID");
+
+                    b.HasIndex("Comment");
 
                     b.HasIndex("UserID");
 
@@ -343,9 +348,6 @@ namespace WebApplicationMovies.Data.Migrations
                     b.Property<int>("CollectionMovieID")
                         .HasColumnType("int");
 
-                    b.Property<int>("CommentID")
-                        .HasColumnType("int");
-
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -363,9 +365,6 @@ namespace WebApplicationMovies.Data.Migrations
 
                     b.Property<DateTime>("ReleaseDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("ScoreID")
-                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
@@ -430,6 +429,9 @@ namespace WebApplicationMovies.Data.Migrations
                     b.Property<int>("MovieID")
                         .HasColumnType("int");
 
+                    b.Property<int?>("Score")
+                        .HasColumnType("int");
+
                     b.Property<double>("ScoreNumber")
                         .HasColumnType("float");
 
@@ -437,6 +439,8 @@ namespace WebApplicationMovies.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("ScoreID");
+
+                    b.HasIndex("Score");
 
                     b.HasIndex("UserID");
 
@@ -558,6 +562,10 @@ namespace WebApplicationMovies.Data.Migrations
 
             modelBuilder.Entity("WebApplicationMovies.Models.Comment", b =>
                 {
+                    b.HasOne("WebApplicationMovies.Models.Movie", null)
+                        .WithMany("Comments")
+                        .HasForeignKey("Comment");
+
                     b.HasOne("WebApplicationMovies.Models.User", null)
                         .WithMany("Comments")
                         .HasForeignKey("UserID")
@@ -588,6 +596,10 @@ namespace WebApplicationMovies.Data.Migrations
 
             modelBuilder.Entity("WebApplicationMovies.Models.Score", b =>
                 {
+                    b.HasOne("WebApplicationMovies.Models.Movie", null)
+                        .WithMany("Scores")
+                        .HasForeignKey("Score");
+
                     b.HasOne("WebApplicationMovies.Models.User", null)
                         .WithMany("Scores")
                         .HasForeignKey("UserID")
@@ -612,6 +624,13 @@ namespace WebApplicationMovies.Data.Migrations
             modelBuilder.Entity("WebApplicationMovies.Models.Genre", b =>
                 {
                     b.Navigation("Movies");
+                });
+
+            modelBuilder.Entity("WebApplicationMovies.Models.Movie", b =>
+                {
+                    b.Navigation("Comments");
+
+                    b.Navigation("Scores");
                 });
 
             modelBuilder.Entity("WebApplicationMovies.Models.Producer", b =>

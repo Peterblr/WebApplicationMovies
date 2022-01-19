@@ -115,50 +115,6 @@ namespace WebApplicationMovies.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Comments",
-                columns: table => new
-                {
-                    CommentID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CommentItem = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Author = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MovieID = table.Column<int>(type: "int", nullable: false),
-                    UserID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Comments", x => x.CommentID);
-                    table.ForeignKey(
-                        name: "FK_Comments_Users_UserID",
-                        column: x => x.UserID,
-                        principalTable: "Users",
-                        principalColumn: "UserID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Scores",
-                columns: table => new
-                {
-                    ScoreID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ScoreNumber = table.Column<double>(type: "float", nullable: false),
-                    UserID = table.Column<int>(type: "int", nullable: false),
-                    MovieID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Scores", x => x.ScoreID);
-                    table.ForeignKey(
-                        name: "FK_Scores_Users_UserID",
-                        column: x => x.UserID,
-                        principalTable: "Users",
-                        principalColumn: "UserID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Movies",
                 columns: table => new
                 {
@@ -171,8 +127,6 @@ namespace WebApplicationMovies.Data.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     GenreID = table.Column<int>(type: "int", nullable: false),
                     ProducerID = table.Column<int>(type: "int", nullable: false),
-                    CommentID = table.Column<int>(type: "int", nullable: false),
-                    ScoreID = table.Column<int>(type: "int", nullable: false),
                     CollectionMovieID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -222,6 +176,64 @@ namespace WebApplicationMovies.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Comments",
+                columns: table => new
+                {
+                    CommentID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CommentItem = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Author = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MovieID = table.Column<int>(type: "int", nullable: false),
+                    UserID = table.Column<int>(type: "int", nullable: false),
+                    Comment = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comments", x => x.CommentID);
+                    table.ForeignKey(
+                        name: "FK_Comments_Movies_Comment",
+                        column: x => x.Comment,
+                        principalTable: "Movies",
+                        principalColumn: "MovieID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Comments_Users_UserID",
+                        column: x => x.UserID,
+                        principalTable: "Users",
+                        principalColumn: "UserID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Scores",
+                columns: table => new
+                {
+                    ScoreID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ScoreNumber = table.Column<double>(type: "float", nullable: false),
+                    UserID = table.Column<int>(type: "int", nullable: false),
+                    MovieID = table.Column<int>(type: "int", nullable: false),
+                    Score = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Scores", x => x.ScoreID);
+                    table.ForeignKey(
+                        name: "FK_Scores_Movies_Score",
+                        column: x => x.Score,
+                        principalTable: "Movies",
+                        principalColumn: "MovieID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Scores_Users_UserID",
+                        column: x => x.UserID,
+                        principalTable: "Users",
+                        principalColumn: "UserID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_ActorMovie_MoviesMovieID",
                 table: "ActorMovie",
@@ -231,6 +243,11 @@ namespace WebApplicationMovies.Data.Migrations
                 name: "IX_CollectionMovies_UserID",
                 table: "CollectionMovies",
                 column: "UserID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_Comment",
+                table: "Comments",
+                column: "Comment");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_UserID",
@@ -251,6 +268,11 @@ namespace WebApplicationMovies.Data.Migrations
                 name: "IX_Movies_ProducerID",
                 table: "Movies",
                 column: "ProducerID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Scores_Score",
+                table: "Scores",
+                column: "Score");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Scores_UserID",
