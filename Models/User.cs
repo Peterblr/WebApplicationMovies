@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -26,12 +27,20 @@ namespace WebApplicationMovies.Models
 
         public DateTime DayOfBirth { get; set; }
 
-        //Roles
+        //Relationships
+        //Role
+        public int RoleID { get; set; }
+
+        [ForeignKey("RoleID")]
+        public Role Role { get; set; }
 
         //Score
+        public List<Score> Scores { get; set; }
 
-        //CollectionMovies
+        //CollectionMovie
+        public List<CollectionMovie> CollectionMovies { get; set; }
 
-        //Comments
+        //Comment
+        public List<Comment> Comments { get; set; }
     }
 }

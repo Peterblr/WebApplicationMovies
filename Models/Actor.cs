@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebApplicationMovies.Models
 {
-    public class Actors
+    public class Actor
     {
         [Key]
         public int ActorID { get; set; }
@@ -19,6 +19,8 @@ namespace WebApplicationMovies.Models
 
         public DateTime DayOfBirth { get; set; }
 
-        //Movies_Actors
+        //Relationship
+        //Movie_Actor
+        public List<Movie_Actor> Movies_Actors { get; set; }
     }
 }

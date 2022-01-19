@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace WebApplicationMovies.Models
 {
-    public class CollectionMovies
+    public class CollectionMovie
     {
         [Key]
-        public int CollectionMoviesID { get; set; }
+        public int CollectionMovieID { get; set; }
 
         public string ImageURL { get; set; }
 
@@ -20,7 +21,12 @@ namespace WebApplicationMovies.Models
         public bool IsPublic { get; set; }
 
         //User
+        public int UserID { get; set; }
 
-        //Movies
+        [ForeignKey("UserID")]
+        public User User { get; set; }
+
+        //Movie
+        public List<Movie> Movies { get; set; }
     }
 }

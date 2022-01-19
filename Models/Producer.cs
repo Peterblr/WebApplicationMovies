@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebApplicationMovies.Models
 {
-    public class Producers
+    public class Producer
     {
         [Key]
         public int ProducerID { get; set; }
@@ -19,6 +19,9 @@ namespace WebApplicationMovies.Models
 
         public DateTime DayOfBirth { get; set; }
 
+        //Relationships
         //Movies
+
+        public List<Movie> Movies { get; set; }
     }
 }

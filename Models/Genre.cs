@@ -13,6 +13,8 @@ namespace WebApplicationMovies.Models
 
         public string GenreName { get; set; }
 
+        //Relationships
         //Movies
+        public List<Movie> Movies { get; set; }
     }
 }
