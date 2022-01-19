@@ -11,6 +11,7 @@ namespace WebApplicationMovies.Models
         [Key]
         public int GenreID { get; set; }
 
+        [Required, StringLength(30, MinimumLength = 3)]
         public string GenreName { get; set; }
 
         //Relationships

@@ -17,8 +17,10 @@ namespace WebApplicationMovies.Models
         [Key]
         public int MovieID { get; set; }
 
+        [Display(Name = "Title"), StringLength(60, MinimumLength = 3)]
         public string Title { get; set; }
 
+        [Display(Name = "Release Date"), DataType(DataType.Date)]
         public DateTime ReleaseDate { get; set; }
 
         public Rating Rating { get; set; }
@@ -27,13 +29,16 @@ namespace WebApplicationMovies.Models
 
         public string Description { get; set; }
 
+        [RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$"), Required, StringLength(30)]
         //Relationship
         //Actor
         public virtual ICollection<Actor> Actors { get; set; }
 
+        [RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$"), Required, StringLength(30)]
         //Genre
         public int GenreID { get; set; }
 
+        [RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$"), Required, StringLength(30)]
         //Producer
         public int ProducerID { get; set; }
 

@@ -12,6 +12,7 @@ namespace WebApplicationMovies.Models
         [Key]
         public int CommentID { get; set; }
 
+        [Required, StringLength(300, MinimumLength = 3)]
         public string CommentItem { get; set; }
 
         public DateTime CreateDate { get; set; }
