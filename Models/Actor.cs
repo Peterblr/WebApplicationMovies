@@ -20,7 +20,7 @@ namespace WebApplicationMovies.Models
         public DateTime DayOfBirth { get; set; }
 
         //Relationship
-        //Movie_Actor
-        public List<Movie_Actor> Movies_Actors { get; set; }
+        //Movie
+        public virtual ICollection<Movie> Movies { get; set; }
     }
 }

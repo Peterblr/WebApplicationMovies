@@ -13,6 +13,10 @@ namespace WebApplicationMovies.Models
 
         public string CommentItem { get; set; }
 
+        public DateTime CreateDate { get; set; }
+
+        public string Author { get; set; }
+
         //Movie
         public int MovieID { get; set; }
 

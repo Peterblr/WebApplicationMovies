@@ -28,8 +28,8 @@ namespace WebApplicationMovies.Models
         public string Description { get; set; }
 
         //Relationship
-        //Movies_Actors
-        public List<Movie_Actor> Movies_Actors { get; set; }
+        //Actor
+        public virtual ICollection<Actor> Actors { get; set; }
 
         //Genre
         public int GenreID { get; set; }
@@ -43,11 +43,11 @@ namespace WebApplicationMovies.Models
         [ForeignKey("ProducerID")]
         public Producer Producer { get; set; }
 
-        //Comments
-        public List<Comment> Comments { get; set; }
+        //Comment
+        public virtual ICollection<Comment> Comments { get; set; }
 
         //Score
-        public List<Score> Scores { get; set; }
+        public virtual ICollection<Score> Scores { get; set; }
 
         //CollectionMovie
         public int CollectionMovieID { get; set; }
