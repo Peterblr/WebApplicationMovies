@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace WebApplicationMovies.Models
 {
-    public enum Role
-    {
-        Guest, User, Admin
-    }
 
     public class User
     {
+        [Key]
         public int UserID { get; set; }
 
         public string Login { get; set; }
@@ -28,11 +26,11 @@ namespace WebApplicationMovies.Models
 
         public DateTime DayOfBirth { get; set; }
 
-        public Role Role { get; set; }
+        //Roles
 
         //Score
 
-        //UserMovies
+        //CollectionMovies
 
         //Comments
     }

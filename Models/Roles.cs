@@ -6,14 +6,12 @@ using System.Threading.Tasks;
 
 namespace WebApplicationMovies.Models
 {
-    public class Comments
+    public class Roles
     {
         [Key]
-        public int CommentID { get; set; }
+        public int RoleID { get; set; }
 
-        public string Comment { get; set; }
-
-        //Movies
+        public string RoleName { get; set; }
 
         //User
     }

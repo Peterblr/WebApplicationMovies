@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,7 +13,8 @@ namespace WebApplicationMovies.Models
 
     public class Movies
     {
-        public int MoviesID { get; set; }
+        [Key]
+        public int MovieID { get; set; }
 
         public string Title { get; set; }
 
@@ -26,13 +28,15 @@ namespace WebApplicationMovies.Models
 
         //Genre
 
-        //Actors
+        //Movies_Actors
 
         //Producer
 
         //Comments
 
         //Score
+
+        //CollectionMovie
 
     }
 }

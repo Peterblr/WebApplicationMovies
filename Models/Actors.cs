@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,6 +8,7 @@ namespace WebApplicationMovies.Models
 {
     public class Actors
     {
+        [Key]
         public int ActorID { get; set; }
 
         public string FirstName { get; set; }
@@ -17,6 +19,6 @@ namespace WebApplicationMovies.Models
 
         public DateTime DayOfBirth { get; set; }
 
-        //Movies
+        //Movies_Actors
     }
 }
