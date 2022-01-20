@@ -1,0 +1,55 @@
+﻿@model IEnumerable<WebApplicationMovies.Models.Producer>
+
+@{
+    ViewData["Title"] = "List of Producer";
+}
+
+<h1>Welcome to Producers View - Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageURL)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DayOfBirth)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img class="rounded-circle" src="@item.ImageURL" alt="@item.LastName" style="max-width: 150px" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DayOfBirth)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ProducerID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ProducerID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ProducerID"
+                       style="color: red">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
