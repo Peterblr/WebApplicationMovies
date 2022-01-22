@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using WebApplicationMovies.Data;
 using WebApplicationMovies.Models;
 using WebApplicationMovies.Models.Repositories;
+using WebApplicationMovies.Models.Services;
 
 namespace WebApplicationMovies
 {
@@ -37,7 +38,11 @@ namespace WebApplicationMovies
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
+
+            services.AddScoped<IActorsService, ActorsService>();
         }
+
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
