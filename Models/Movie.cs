@@ -22,8 +22,8 @@ namespace WebApplicationMovies.Models
 
         [Display(Name = "Release Date"), DataType(DataType.Date)]
         public DateTime ReleaseDate { get; set; }
-
-        public Rating Rating { get; set; }
+        [DisplayFormat(NullDisplayText = "No Rating")]
+        public Rating? Rating { get; set; }
 
         public string ImageURL { get; set; }
 
@@ -38,9 +38,13 @@ namespace WebApplicationMovies.Models
         //Genre
         public int GenreID { get; set; }
 
+        public virtual Genre Genre { get; set; }
+
         [RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$"), Required, StringLength(30)]
         //Producer
         public int ProducerID { get; set; }
+
+        public virtual Producer Producer { get; set; }
 
         //Comment
         [ForeignKey("Comment")]
@@ -52,5 +56,7 @@ namespace WebApplicationMovies.Models
 
         //CollectionMovie
         public int CollectionMovieID { get; set; }
+
+        public virtual CollectionMovie CollectionMovie { get; set; }
     }
 }

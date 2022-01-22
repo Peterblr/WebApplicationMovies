@@ -7,22 +7,26 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebApplicationMovies.Data;
 using WebApplicationMovies.Models;
+using WebApplicationMovies.Models.Repositories;
 
 namespace WebApplicationMovies.Controllers
 {
     public class ActorsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        //private readonly ApplicationDbContext _context;
 
-        public ActorsController(ApplicationDbContext context)
+        private readonly IRepository<Actor> _service;
+
+
+        public ActorsController(IRepository<Actor> service)
         {
-            _context = context;
+            _service = service;
         }
 
         // GET: Actors
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Actors.ToListAsync());
+            return View(await _service.GetAll());
         }
 
         // GET: Actors/Details/5
@@ -33,7 +37,7 @@ namespace WebApplicationMovies.Controllers
                 return NotFound();
             }
 
-            var actor = await _context.Actors
+            var actor = await _repository
                 .FirstOrDefaultAsync(m => m.ActorID == id);
             if (actor == null)
             {
@@ -58,8 +62,8 @@ namespace WebApplicationMovies.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(actor);
-                await _context.SaveChangesAsync();
+                _repository.Add(actor);
+                await _repository.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(actor);

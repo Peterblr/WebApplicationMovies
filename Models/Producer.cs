@@ -23,6 +23,6 @@ namespace WebApplicationMovies.Models
         [DataType(DataType.Date), Display(Name = "Birthday"), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DayOfBirth { get; set; }
 
-        public List<Movie> Movies { get; set; }
+        public virtual ICollection<Movie> Movies { get; set; }
     }
 }

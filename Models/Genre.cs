@@ -16,6 +16,6 @@ namespace WebApplicationMovies.Models
 
         //Relationships
         //Movies
-        public List<Movie> Movies { get; set; }
+        public virtual ICollection<Movie> Movies { get; set; }
     }
 }
