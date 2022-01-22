@@ -5,14 +5,14 @@ using System.Threading.Tasks;
 
 namespace WebApplicationMovies.Models.Repositories
 {
-    public interface IRepository<T> : IDisposable
-        where T : class
+    public interface IRepository<T> where T : class
     {
-        Task<IEnumerable<T>> GetAll(); // получение всех объектов
-        T Get(int id); // получение одного объекта по id
-        void Create(T item); // создание объекта
-        void Update(T item); // обновление объекта
-        void Delete(int id); // удаление объекта по id
-        void Save();  // сохранение изменений
+        Task<IEnumerable<T>> GetAllAsync(); // получение всех объектов
+        Task<T> GetByIdAsync(int id); // получение одного объекта по id
+        //Task CreateAsync(T item); // создание объекта
+        Task UpdateAsync(int id, T item); // обновление объекта
+        Task DeleteAsync(int id); // удаление объекта по id
+        //Task Save();  // сохранение изменений
+        Task AddAsync(T item);
     }
 }

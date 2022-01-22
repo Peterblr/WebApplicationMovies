@@ -26,19 +26,13 @@ namespace WebApplicationMovies.Controllers
         // GET: Actors
         public async Task<IActionResult> Index()
         {
-            return View(await _service.GetAll());
+            return View(await _service.GetAllAsync());
         }
 
         // GET: Actors/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var actor = await _repository
-                .FirstOrDefaultAsync(m => m.ActorID == id);
+            var actor = await _service.GetByIdAsync(id);
             if (actor == null)
             {
                 return NotFound();
@@ -62,22 +56,17 @@ namespace WebApplicationMovies.Controllers
         {
             if (ModelState.IsValid)
             {
-                _repository.Add(actor);
-                await _repository.SaveChangesAsync();
+                await _service.AddAsync(actor);
+
                 return RedirectToAction(nameof(Index));
             }
             return View(actor);
         }
 
         // GET: Actors/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var actor = await _context.Actors.FindAsync(id);
+            var actor = await _service.GetByIdAsync(id);
             if (actor == null)
             {
                 return NotFound();
@@ -99,37 +88,32 @@ namespace WebApplicationMovies.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(actor);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ActorExists(actor.ActorID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                //try
+                //{
+                //    await _service.UpdateAsync(id, actor);
+                //}
+                //catch (DbUpdateConcurrencyException)
+                //{
+                //    if (!ActorExists(actor.ActorID))
+                //    {
+                //        return NotFound();
+                //    }
+                //    else
+                //    {
+                //        throw;
+                //    }
+                //}
+                await _service.UpdateAsync(id, actor);
+
                 return RedirectToAction(nameof(Index));
             }
             return View(actor);
         }
 
         // GET: Actors/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var actor = await _context.Actors
-                .FirstOrDefaultAsync(m => m.ActorID == id);
+            var actor = await _service.GetByIdAsync(id);
             if (actor == null)
             {
                 return NotFound();
@@ -143,15 +127,16 @@ namespace WebApplicationMovies.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var actor = await _context.Actors.FindAsync(id);
-            _context.Actors.Remove(actor);
-            await _context.SaveChangesAsync();
+            var actor = await _service.GetByIdAsync(id);
+
+            await _service.DeleteAsync(id);
+
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ActorExists(int id)
-        {
-            return _context.Actors.Any(e => e.ActorID == id);
-        }
+        //private bool ActorExists(int id)
+        //{
+        //    return _service.Actors.Any(e => e.ActorID == id);
+        //}
     }
 }

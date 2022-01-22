@@ -12,6 +12,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApplicationMovies.Data;
+using WebApplicationMovies.Models;
+using WebApplicationMovies.Models.Repositories;
 
 namespace WebApplicationMovies
 {
