@@ -34,7 +34,6 @@ namespace WebApplicationMovies.Models
         //Actor
         public virtual ICollection<Actor> Actors { get; set; }
 
-        [RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$"), Required, StringLength(30)]
         //Genre
         public int GenreID { get; set; }
 

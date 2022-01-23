@@ -7,12 +7,17 @@ namespace WebApplicationMovies.Models.Repositories
 {
     public interface IRepository<T> where T : class
     {
-        Task<IEnumerable<T>> GetAllAsync(); // получение всех объектов
-        Task<T> GetByIdAsync(int id); // получение одного объекта по id
-        //Task CreateAsync(T item); // создание объекта
-        Task UpdateAsync(int id, T item); // обновление объекта
-        Task DeleteAsync(int id); // удаление объекта по id
-        //Task Save();  // сохранение изменений
-        Task AddAsync(T item);
+        //Task<IEnumerable<T>> GetAllAsync();
+        //Task<T> GetByIdAsync(int id);
+        //Task UpdateAsync(int id, T item);
+        //Task DeleteAsync(int id);
+        //Task AddAsync(T item);
+
+        IEnumerable<T> GetAll();
+        T GetById(object id);
+        void Insert(T obj);
+        void Update(T obj);
+        void Delete(object id);
+        void Save();
     }
 }
